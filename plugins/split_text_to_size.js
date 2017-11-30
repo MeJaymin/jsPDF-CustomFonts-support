@@ -55,6 +55,13 @@
 				output.push(options.font.widthOfString(text[i], fontSize, charSpace) / fontSize)
 			}
 			return output;
+		} else if (this.internal.getFont().id.slice(1) >= 14) {
+			var fontSize = this.internal.getFontSize();
+			var charSpace = this.internal.getCharSpace();
+			for (i = 0; i < l; i++) {
+				output.push(this.internal.getFont().metadata.widthOfString(text[i], fontSize, charSpace) / fontSize)
+			}
+			return output;
 		}
 
 		var widths = options.widths ? options.widths : this.internal.getFont().metadata.Unicode.widths,
@@ -69,7 +76,7 @@
 		var default_char_width = widths[0] || widthsFractionOf;
 
 
-		for (i = 0, l = text.length; i < l; i++) {
+		for (i = 0; i < l; i++) {
 			char_code = text.charCodeAt(i)
 			output.push(
 				(widths[char_code] || default_char_width) / widthsFractionOf +
